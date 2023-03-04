@@ -124,6 +124,7 @@ read_user_input:
 	bx  lr
 
 display:
+//prologo_display
 	push {r7}
 	sub sp, sp, #12
 	add r7, sp, #0
@@ -137,7 +138,7 @@ display:
 	ldr r1, =cout
 	mov r2, #0x10
 	svc 0x0
-
+//Epilogo_display
 	mov r7, r4
 	mov r0, r3
 	adds r7, r7, #12
