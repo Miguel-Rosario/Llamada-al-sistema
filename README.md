@@ -58,6 +58,7 @@ Una vez que se hayan almacenado los elementos procesados del buffer de entrada e
   
 
 ## Funcion lee entrada de datos (read_user_imput).
+
 Empieza la funcion con el prologo, para reservar la memoria de las variables que se usaran.
 ```asm
 /* Prologo de la funcion read_user_input*/
@@ -98,5 +99,5 @@ Termina la funcion con el epiligo, para liberar la memoria que se reservo y regr
 	bx  lr			@ regresar a la funcion llamante 
 
 ```
-
+En resumen esta funcion hace una llamada al sistema para leer la entrada del ususario y almacenar los datos en un buffer 
   
