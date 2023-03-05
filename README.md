@@ -59,4 +59,7 @@ Una vez que se hayan almacenado los elementos procesados del buffer de entrada e
 
 ## Funcion lee entrada de datos (read_user_imput).
 
+```asm
+
+```
   
