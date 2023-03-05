@@ -56,4 +56,7 @@ strb	r2, [r3]		@ array de enteros[i] = a2i(buffer de entrada[i]) se almacena el 
 Este proceso se repite hasta que se termine de recorrer y procesar las direcciones de los elementos del buffer de entrada.
 Una vez que se hayan almacenado los elementos procesados del buffer de entrada en un arreglo auxiliar, podemos pasar al siguiente bucle el cual procesara los numeros enteros asignados al arreglo previo, los cuales se convertiran a caracteres para posteriormente realizar la escritura de dicha cadena introducida. La funcion encargada de convertir a numeros enteros a caracteres es i2a (integer to ascii):
   
+
+## Funcion lee entrada de datos (read_user_imput).
+
   
