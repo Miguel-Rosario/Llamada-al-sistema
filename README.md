@@ -55,6 +55,47 @@ strb	r2, [r3]		@ array de enteros[i] = a2i(buffer de entrada[i]) se almacena el 
 ```
 Este proceso se repite hasta que se termine de recorrer y procesar las direcciones de los elementos del buffer de entrada.
 Una vez que se hayan almacenado los elementos procesados del buffer de entrada en un arreglo auxiliar, podemos pasar al siguiente bucle el cual procesara los numeros enteros asignados al arreglo previo, los cuales se convertiran a caracteres para posteriormente realizar la escritura de dicha cadena introducida. La funcion encargada de convertir a numeros enteros a caracteres es i2a (integer to ascii):
+```asm
+/*Calculo de las posiciones del arreglo de enteros*/
+add	r2, r7, #20		@ Se carga base(arreglo de enteros)
+ldr	r3, [r7, #4]		@ Se carga el iterador i
+add	r3, r3, r2		@ Una vez obtenido lo anterior, realizamos la operacion: base(arreglo de enteros) + i y se almacena en r3 la posicion
+ldrb	r3, [r3]		@ Se carga arreglo de enteros[i]
+
+/*Invocacion de i2a*/
+mov	r0, r3			@ Se pasa como parametro arreglo de enteros[i]
+bl	i2a			@ Se manda a llamar i2a y se pasa el argumento: i2a(arreglo de enteros[i])
+mov	r3, r0			@ Se mueve el resultado retornado por la funcion al registro r3
+
+mov	r1, r3			@ Resultado de la invocacion de i2a
+ldr r2, =cout			@ Se carga la direccion base del buffer de salida: base(buffer de salida)
+ldr	r3, [r7, #4]		@ Se carga el iterdor i
+add	r3, r3, r2		@ Una vez obtenido lo anterior, realizamos la operacion: base(buffer de salida) + i
+
+mov	r2, r1			@ Se asigna el resultado retornado por i2a en el registro r2
+strb	r2, [r3] 		@ Se hace la asignacion: buffer de salida[i] = i2a(arreglo de enteros[i])
+
+```
+Despues de pasar de los bucles que procesan la lectura, es tiempo de pasar a la llamada al sistema que dara lugar a la escritura del mensaje introducido:
+```asm
+/*Se invoca al buffer de salida*/
+bl 	display	@ Se invoca a la funcion la cual realiza la escritura
+mov 	r0,#0x0	
+mov 	r7,#0x1
+svc 	0x0
+```
+Finalmente se llega a la parte del epilogo, donde se restauran los valores originales del sp y la pila vuelve a su estado inicial:
+```asm
+/*Comienza el epilogo*/
+movs	r3, #0
+mov	r0, r3
+adds	r7, r7, #40 @ Se regresa el valor original del sp
+mov	sp, r7	@ Se restaura el sp
+pop	{r7, pc}	@ Se regresa a su estado original la pila
+```
+
+
+
   
 
 ## Funcion lee entrada de datos (read_user_imput).
