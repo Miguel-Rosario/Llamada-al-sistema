@@ -65,17 +65,38 @@ Empieza la funcion con el prologo, para reservar la memoria de las variables que
 	sub sp, sp, #12		@asignamos el valor de sp para reservar espacio para las variables 
 	add r7, sp, #0		@inicializa r7 para apuntar al inicio del espacio reservado 
 ```
-Se invoca al buffer de entrada que sera con las llamadas al sistema y despues cargarlos en un registro
+Se invoca al buffer de entrada y el numero de bytes
 ```asm
 	str r1, [r7, #4] 	@ Bufer de entrada arg1
 	str r0, [r7, #8] 	@ Numero de bytes a almacenar arg2
-
+```
+Esta instruccion es importante para no perder la direccion de la pila 
+```asm
 	mov r4, r7		@respalda el valor de la pila 
+```
+Hace una llamada al sistema y se carga el valor en los registros 
+```asm
 	mov r7, #0x3		@llamada al sistema para leer la entrada del usuario 
 	mov r0, #0x0		@
 	ldr r1, [r4, #8]	@cargar el primer argumento (buffer de entrada) en r1
 	ldr r2, [r4, #4]	@carga el segundo argumento bytes a almacenar 
 	svc 0x0			@lee la entrada del usuario
+```
+Aqui regrsamos el valor del puntero del marco de la pila a r7
+```asm
+mov r7, r4		@regresa el valor original de r7
+```
+Termina la funcion con el epiligo, para liberar la memoria que se reservo y regresar los valores a la funcion desde donde se invoco
+
+```asm
+	
+	/*empieza el epilogo*/
+	mov r0, r3		@
+	adds r7, r7, #12	@libera el espacio reservado para las variables 
+	mov sp, r7		@restaurar el valor original de sp 
+	pop {r7}		@recuperar e vaor de r7 de la pila 
+	bx  lr			@ regresar a la funcion llamante 
+
 ```
 
   
