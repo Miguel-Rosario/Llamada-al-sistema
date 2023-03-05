@@ -58,7 +58,7 @@ Una vez que se hayan almacenado los elementos procesados del buffer de entrada e
   
 
 ## Funcion lee entrada de datos (read_user_imput).
-
+Empieza la funcion con el prologo, para reservar la memoria de las variables que se usaran
 ```asm
 /* Prologo de la funcion read_user_input*/
 	push {r7} 		@guarda el valor de r7 en pila 
