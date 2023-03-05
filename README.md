@@ -66,7 +66,8 @@ Empieza la funcion con el prologo, para reservar la memoria de las variables que
 	sub sp, sp, #12		@asignamos el valor de sp para reservar espacio para las variables 
 	add r7, sp, #0		@inicializa r7 para apuntar al inicio del espacio reservado 
 ```
-Se invoca al buffer de entrada y el numero de bytes
+Guarda  los argumentos (buffer de entrada) en la pila, en una pocision diferente cada una, estas van de 4 en 4 bytes tomando como base la direccion de la pila r7
+
 ```asm
 	str r1, [r7, #4] 	@ Bufer de entrada arg1
 	str r0, [r7, #8] 	@ Numero de bytes a almacenar arg2
