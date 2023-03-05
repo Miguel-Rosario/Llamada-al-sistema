@@ -72,7 +72,7 @@ Guarda  los argumentos (buffer de entrada) en la pila, en una pocision diferente
 	str r1, [r7, #4] 	@ Bufer de entrada arg1
 	str r0, [r7, #8] 	@ Numero de bytes a almacenar arg2
 ```
-Esta instruccion es importante para no perder la direccion de la pila 
+Esta instruccion es importante para no perder la direccion de la pila, ya que el registro r7 se usa para llamada al sistema, evitando perder la direccion de la pila 
 ```asm
 	mov r4, r7		@respalda el valor de la pila 
 ```
