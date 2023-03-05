@@ -102,26 +102,28 @@ i2a:
 
 
 read_user_input:
-	push {r7}
-	sub sp, sp, #12
-	add r7, sp, #0
+/* Prologo de la funcion read_user_input*/
+	push {r7} 		@guarda el valor de r7 en pila 
+	sub sp, sp, #12		@asignamos el valor de sp para reservar espacio para las variables 
+	add r7, sp, #0		@inicializa r7 para apuntar al inicio del espacio reservado 
 
-	str r1, [r7, #4] @ Bufer de entrada arg1
-	str r0, [r7, #8] @ NUmero de bytes a almacenar arg2
+	str r1, [r7, #4] 	@ Bufer de entrada arg1
+	str r0, [r7, #8] 	@ Numero de bytes a almacenar arg2
 
-	mov r4, r7
-	mov r7, #0x3
-	mov r0, #0x0
-	ldr r1, [r4, #8]
-	ldr r2, [r4, #4]
-	svc 0x0
+	mov r4, r7		@respalda el valor de la pila 
+	mov r7, #0x3		@llamada al sistema para leer la entrada del usuario 
+	mov r0, #0x0		@
+	ldr r1, [r4, #8]	@cargar el primer argumento (buffer de entrada) en r1
+	ldr r2, [r4, #4]	@carga el segundo argumento bytes a almacenar 
+	svc 0x0			@lee la entrada del usuario 
 
-	mov r7, r4
-	mov r0, r3
-	adds r7, r7, #12
-	mov sp, r7
-	pop {r7}
-	bx  lr
+	mov r7, r4		@regresa el valor original de r7
+	/*empieza el epilogo*/
+	mov r0, r3		@
+	adds r7, r7, #12	@libera el espacio reservado para las variables 
+	mov sp, r7		@restaurar el valor original de sp 
+	pop {r7}		@recuperar e vaor de r7 de la pila 
+	bx  lr			@ regresar a la funcion llamante 
 
 display:
 //prologo_display
