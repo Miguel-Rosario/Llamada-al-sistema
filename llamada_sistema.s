@@ -132,7 +132,11 @@ display:
 	add r7, sp, #0     @inicializa r7 para apuntar al inicio del espacio reservado 
 	str r1, [r7, #4]    @ Bufer de entrada arg1
 	str r0, [r7, #8]    @ Numero de bytes a almacenar arg2
-	mov r4, r7           @respalda el valor de la pila 
+
+	ldr r1, [r7, #4]	@ Se cargan el argumento procesar en la llamada
+	ldr r0, [r7, #8]	@ Se carga el argumento de la llamada correspondiente a la escritura
+
+	mov r4, r7           @respalda el valor de la pila
 	mov r7, #0x4
 	mov r0, #0x1
 	ldr r1, =cout    @carga en el registro R1 la dirección de memoria de la función "cout"
@@ -251,7 +255,6 @@ main:	/*int main()*/
 	pop	{r7, pc}	@ Se regresa a su estado original la pila
 .L16:
 	.align	2
-	.word	__stack_chk_guard
 	.size	main, .-main
 
 .section .data
