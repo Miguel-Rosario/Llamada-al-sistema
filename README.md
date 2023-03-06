@@ -143,13 +143,9 @@ Termina la funcion con el epiligo, para liberar la memoria que se reservo y regr
 ```
 En resumen esta funcion hace una llamada al sistema para leer la entrada del ususario y almacenar los datos en un buffer 
 
-## Display.
+## Marco funcion de entrada de datos (read_user_input).
 read_user_input_frame
-## Display.
-Display_frame
-
-![image](https://user-images.githubusercontent.com/126711639/223006659-5e315868-8741-45aa-88dc-edf49a5e0010.png)
-
+![Marco_read_user_input](https://user-images.githubusercontent.com/126648916/223009153-546b27b8-3cd6-4d09-ad46-8edf4fbc4c58.jpeg)
 
 
 
