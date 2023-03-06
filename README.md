@@ -187,3 +187,12 @@ El .global permite que sea llamada desde otras partes del programa
  
   ```asm
 .global	main   @define la función "main" como global
+
+```
+## Display.
+Display_frame
+
+![image](https://user-images.githubusercontent.com/126711639/223006659-5e315868-8741-45aa-88dc-edf49a5e0010.png)
+
+
+
