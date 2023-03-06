@@ -145,6 +145,7 @@ En resumen esta funcion hace una llamada al sistema para leer la entrada del usu
 
 ## Marco funcion de entrada de datos (read_user_input).
 read_user_input_frame
+
 ![Marco_read_user_input](https://user-images.githubusercontent.com/126648916/223009153-546b27b8-3cd6-4d09-ad46-8edf4fbc4c58.jpeg)
 
 
