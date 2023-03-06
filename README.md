@@ -143,6 +143,16 @@ Termina la funcion con el epiligo, para liberar la memoria que se reservo y regr
 ```
 En resumen esta funcion hace una llamada al sistema para leer la entrada del ususario y almacenar los datos en un buffer 
 
+## Display.
+read_user_input_frame
+## Display.
+Display_frame
+
+![image](https://user-images.githubusercontent.com/126711639/223006659-5e315868-8741-45aa-88dc-edf49a5e0010.png)
+
+
+
+
 ## Funcion para mostrar la Salida (display).
 
 La salida llega a ser muy similar a lo que es la entrada, como toda funcion vamos a empezar con el prologo para que compoo ya se sabe es para reservar la memoria de las variables que se usaran en esta funcion. 
