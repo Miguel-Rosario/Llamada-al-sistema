@@ -147,7 +147,7 @@ Termina la funcion con el epiligo, para liberar la memoria que se reservo y regr
 En resumen esta funcion hace una llamada al sistema para leer la entrada del ususario y almacenar los datos en un buffer 
 
 
-##read_user_input_frame
+## read_user_input_frame
 
 ![Marco_read_user_input](https://user-images.githubusercontent.com/126648916/223009153-546b27b8-3cd6-4d09-ad46-8edf4fbc4c58.jpeg)
 
