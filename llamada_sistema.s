@@ -127,35 +127,34 @@ read_user_input:
 
 display:
 //prologo_display
-	push {r7}
-	sub sp, sp, #12
-	add r7, sp, #0
-
-	str r1, [r7, #4]
-	str r0, [r7, #8]
-
-	mov r4, r7
+	push {r7}        @guarda el valor de r7 en pila 
+	sub sp, sp, #12   @asignamos el valor de sp para reservar espacio para las variables 
+	add r7, sp, #0     @inicializa r7 para apuntar al inicio del espacio reservado 
+	str r1, [r7, #4]    @ Bufer de entrada arg1
+	str r0, [r7, #8]    @ Numero de bytes a almacenar arg2
+	mov r4, r7           @respalda el valor de la pila 
 	mov r7, #0x4
 	mov r0, #0x1
-	ldr r1, =cout
+	ldr r1, =cout    @carga en el registro R1 la dirección de memoria de la función "cout"
 	mov r2, #0x10
-	svc 0x0
+	svc 0x0           @lee la entrada del usuario
+
 //Epilogo_display
-	mov r7, r4
-	mov r0, r3
-	adds r7, r7, #12
-	mov sp, r7
-	pop {r7}
-	bx lr
-
-
-
-	.align	1
-	.global	main
-	.syntax unified
-	.thumb
-	.thumb_func
-	.type	main, %function
+	mov r7, r4      @respalda el valor de la pila 
+	mov r0, r3       @carga en el registro R0 el valor del registro R3
+	adds r7, r7, #12   @libera el espacio reservado para las variables 
+	mov sp, r7        @restaurar el valor original de sp 
+	pop {r7}       @guarda el valor de r7 en pila 
+	bx lr           @ regresar a la funcion llamante 
+	
+	
+	.align	1        @ alinea la dirección de memoria
+	.global	main       @define la función "main" como global
+	.syntax unified     @especifica la sintaxis unificada de ARM y Thumb
+	.thumb              @especifica que el código siguiente se escribirá en modo Thumb.
+	.thumb_func           @especifica que la siguiente función está escrita en modo Thumb
+	.type	main, %function   @indica que la función "main" es de tipo función
+	
 main:	/*int main()*/
 	@ args = 0, pretend = 0, frame = 40
 	@ frame_needed = 1, uses_anonymous_args = 0
