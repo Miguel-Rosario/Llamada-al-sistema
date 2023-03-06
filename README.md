@@ -142,4 +142,48 @@ Termina la funcion con el epiligo, para liberar la memoria que se reservo y regr
 
 ```
 En resumen esta funcion hace una llamada al sistema para leer la entrada del ususario y almacenar los datos en un buffer 
+
+## Funcion para mostrar la Salida (display).
+
+La salida llega a ser muy similar a lo que es la entrada, como toda funcion vamos a empezar con el prologo para que compoo ya se sabe es para reservar la memoria de las variables que se usaran en esta funcion. 
+
+```asm
+	push {r7}        @guarda el valor de r7 en pila 
+	sub sp, sp, #12   @asignamos el valor de sp para reservar espacio para las variables 
+	add r7, sp, #0     @inicializa r7 para apuntar al inicio del espacio reservado 
+```
+Vuelve a guardar los argumentos en la pila, en una pocision diferente,tomando como base la direccion de la pila r7
   
+  ```asm
+	str r1, [r7, #4]    @ Bufer de entrada arg1
+	str r0, [r7, #8]    @ Numero de bytes a almacenar arg2
+	mov r4, r7           @respalda el valor de la pila 
+```	
+el #0x4 es una interrupción del sistema que se utiliza para mostrar el mensaje en pantalla utilizando la función "cout".
+  ```asm
+	mov r7, #0x4
+```	
+el #0x1 una interrupción del sistema que se utiliza para realizar la acción de salida del programa.
+  ```asm
+	mov r0, #0x1
+```
+La primera instruccion,carga en R1 la dirección de memoria de la función "cout", la siguiente instruccion hace la llamada al sistema con el número 0x10 esta se utiliza para realizar operaciones de E/S en el sistema, en particular para mostrar texto en la consola o en otro dispositivo de salida utilizando la función "cout".
+
+```asm
+	ldr r1, =cout    @carga el registro R1 
+	mov r2, #0x10
+```
+Comienza con el epilogo para darle fin a la funcion y devolver todo como estaba
+```asm
+	mov r7, r4      @respalda el valor de la pila 
+	mov r0, r3       @carga en el registro R0 el valor del registro R3
+	adds r7, r7, #12   @libera el espacio reservado para las variables 
+	mov sp, r7        @restaurar el valor original de sp 
+	pop {r7}       @guarda el valor de r7 en pila 
+	bx lr           @ regresar a la funcion llamante 
+	
+```	
+El .global permite que sea llamada desde otras partes del programa
+ 
+  ```asm
+.global	main   @define la función "main" como global
