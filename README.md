@@ -94,7 +94,9 @@ mov	sp, r7	@ Se restaura el sp
 pop	{r7, pc}	@ Se regresa a su estado original la pila
 ```
 
-Main frame:
+###Main frame:
+
+
 ![image](https://user-images.githubusercontent.com/79227555/223010046-e4ed01ad-7825-4237-8a10-b86423d59d56.png)
 
   
